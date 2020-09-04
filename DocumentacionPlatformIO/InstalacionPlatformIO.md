@@ -110,4 +110,22 @@ Una vez establecida la comunicacion, nos falta agregar la linea de codigo para i
 - print() : Muestra un texto y deja el cursor al final del texto mostrado
 - println() : Muestra un texto y deja el cursor en la linea siguiente del texto mostrado
 
+Procedemos a utilizar cualquiera de los dos, en este caso utilizaremos **print()**, si queremos que el mensaje se muestre una sola vez entonces ponemos:
 
+```cpp
+
+void setup(){
+    Serial.begin(9600);
+    Serila.print("Hola mundo");
+}
+
+```
+Si queremos que el mensaje se repita o muestra cada cierto tiempo, se trabaja en **void loop()** utilizando el comando **delay()**, cabe mencionar que **Serial.begin(9600)** permanecera en **void setup()** ya que solo establece el tipo de comunicacion.
+
+```cpp
+void loop(){
+    Serial.print("Hola mundo");
+    delay(1000);
+}
+```
+En donde **delay(1000)** apagara o detendra el loop por 1 segundo, finalizado ese segundo volvera a mostrar el *Hola mundo* y asi continuara hasta que un agente externo detenga el programa.
