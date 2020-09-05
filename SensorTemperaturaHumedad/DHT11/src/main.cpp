@@ -1,7 +1,8 @@
 #include <Arduino.h>
 #include <DHT.h>
 
-DHT dht(5, DHT11);
+#define DHTPIN 2
+DHT dht(DHTPIN, DHT11);
 
 void setup() {
   Serial.begin(9600);
@@ -9,5 +10,9 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  float t = dht.readTemperature();
+  Serial.print("Temperatura: ");
+  Serial.print(t);
+  Serial.println(" °C");
+  delay(2000);
 }
