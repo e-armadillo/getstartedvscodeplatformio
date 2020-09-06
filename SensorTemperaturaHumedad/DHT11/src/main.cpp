@@ -1,8 +1,10 @@
 #include <Arduino.h>
 #include <DHT.h>
+#include <HardwareSerial.h>
 
-#define DHTPIN 2
+#define DHTPIN 22
 DHT dht(DHTPIN, DHT11);
+
 
 void setup() {
   Serial.begin(9600);
