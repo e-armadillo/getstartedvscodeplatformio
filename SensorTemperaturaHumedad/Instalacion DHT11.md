@@ -30,7 +30,9 @@ Debemos tener encuenta los siguientes pasos:
 
 - Tener instalado PlatformIO
 - Haber creado nuestro proyecto
-- Agregar la libreria **DHT.h** de Adafruit a nuestro proyecto creado
+- Agregar la libreria **DHT.h** de Adafruit a nuestro proyecto creado (Recomendado instalar las dos librerias disponibles)
+  
+![](Libreria.png)
 
 ***
 En el caso de que la libreria añadida desde platformio no se instale bien y provoque algun error, se recomienda instalarlo mediante la terminal escribiendo
@@ -87,8 +89,9 @@ Ya añadida la libreria debemos inicializar nuestro sensor de la siguiente maner
 
 //Establecemos el sensor DHT a utilizar y el puerto a ocupar
 //dht(puerto, tipo de sensor)
+#define DHTPIN 22
 
-DHT dht(5, DHT11);
+DHT dht(DHTPIN, DHT11);
 
 void setup(){
     Serial.begin(9600); //Establecemos la comunicacion
@@ -96,6 +99,15 @@ void setup(){
 }
 
 void loop(){
-
+    float t = readTemperature();
+    print("Temperatura");
+    print(t);
+    println("°C");
+    delay(2000);
 }
 ```
+
+Establecimos **float t** pues **t** sera nuestra variable de temperatura y al declararla float podremos obtener mayor precision ya que sera de tipo *Decimal*
+
+Para poder observar los datos que recoge debemos abrir el monitor serie en PlatformIO, para eso nos dirigimos a la barra de abajo:
+
