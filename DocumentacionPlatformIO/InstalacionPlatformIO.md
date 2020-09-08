@@ -50,6 +50,12 @@ Dentro de *src* encontramos el archivo **main.cpp** el cual es el responsable pa
 
 ![](Main.png)
 
+<center>
+
+*Vista de archivo main.cpp, en este archivo es donde se programan todos los sensores y/o elementos a utilizar*
+
+</center>
+
 ***
 
 ### Librerias
