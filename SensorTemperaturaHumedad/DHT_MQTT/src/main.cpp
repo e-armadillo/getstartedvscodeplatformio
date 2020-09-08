@@ -66,7 +66,7 @@ void setup() {
   //Configuration for Client
   client.setServer(mqtt_address,mqtt_port);
   client.setCallback(callback);
-  
+  dht.begin();
 }
 //Reconnect function
 void reconnect(){
