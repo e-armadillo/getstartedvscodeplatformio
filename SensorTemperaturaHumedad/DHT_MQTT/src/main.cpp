@@ -1,7 +1,16 @@
   
 #include <Arduino.h>
 #include <PubSubClient.h>
+
+#include <DNSServer.h>
+
+#ifdef ESP32
 #include <WiFi.h>
+#elif defined(ESP8266)
+#include <ESP8266WiFi.h>
+#endif
+
+
 #include <DHT.h>
 
 //Begin dht setup
