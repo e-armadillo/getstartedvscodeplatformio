@@ -1,4 +1,7 @@
-  
+/*****************************************
+ * Include Libraries
+ ****************************************/
+
 #include <Arduino.h>
 #include <PubSubClient.h>
 
@@ -10,12 +13,16 @@
 #include <ESP8266WiFi.h>
 #endif
 
+/*****************************************
+ * Include Senspr Humedity
+ ****************************************/
 
 #include <DHT.h>
+#define DHTPIN 22       // Here change to the correct pin in your setup
+#define DHTTYPE DHT11   // there is 2 option here. DHT11 or DHT22
+DHT dht(DHTPIN, DHTTYPE);
 
-//Begin dht setup
-#define DHTPIN 22
-DHT dht(DHTPIN, DHT11);
+
 //Constant to connect to the MQTT broker
 const char *mqtt_address = "";
 int mqtt_port = 1883;
@@ -31,7 +38,23 @@ const char *publish = "";
 const char* wifi_ssid = "";
 const char* password = "";
 
-//setting a WifiClient
+
+char topic[150];
+char payload[50];
+String clientMac = "";
+unsigned char mac[6];
+
+struct Config {
+   /* data */
+  char name[20];
+  bool enabled;
+  int hour;
+} config;
+
+
+/****************************************
+ * Initialize a global instance
+ ****************************************/
 WiFiClient espClient;
 PubSubClient client(espClient);
 
@@ -56,12 +79,13 @@ void W_setup(){
       Serial.println("IP Address: ");
       Serial.println(WiFi.localIP());
 }
+
 //this function is called when a new message arrive at the client
-void callback(char* topic, byte* payload, unsigned int length){
+void callback(char* topic, byte* payload, unsigned int  long length){
       String msg_in = "";
       Serial.print(topic);
       Serial.println("");
-      for(int i=0; i<length; i++){
+      for( unsigned int long i=0; i<length; i++){
         msg_in += (char)payload[i];
       }
       msg_in.trim();
@@ -128,4 +152,3 @@ void loop() {
 
   }
 }
-
