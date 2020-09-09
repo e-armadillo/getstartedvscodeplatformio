@@ -58,6 +58,14 @@ void callback(char* topic, byte* payload, unsigned int length){
       msg_in.trim();
       Serial.println("Message:" + msg_in);
 }
+
+int temperature(){
+
+  float t = dht.readTemperature();
+  delay(2000);
+  return t;
+}
+
 void setup() {
   //Setup of Wifi
   Serial.begin(9600);
@@ -99,7 +107,7 @@ void loop() {
   if (client.connected()){
     //What we want to send
     //Example
-    String str = "Temperature: "+String(temperature())+" C°";
+    String str = "Temperature: "+String(temperature())+" C";
     str.toCharArray(msg_c,25);
     client.publish(subscribe,msg_c);
     delay(1000);
@@ -112,9 +120,3 @@ void loop() {
   }
 }
 
-int temperature(){
-
-  float t = dht.readTemperature();
-  delay(2000);
-  return t;
-}
