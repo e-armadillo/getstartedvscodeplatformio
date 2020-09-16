@@ -6,8 +6,10 @@
         {
             "name": "Win32",
             "includePath": [
-                "c:/Users/alanr/Documents/PlatformIO/Projects/DS18B20_MQTT/include",
-                "c:/Users/alanr/Documents/PlatformIO/Projects/DS18B20_MQTT/src",
+                "c:/Users/alanr/Desktop/Codes/getstartedvscodeplatformio/SensorDS18B20/DS18B20_MQTT/include",
+                "c:/Users/alanr/Desktop/Codes/getstartedvscodeplatformio/SensorDS18B20/DS18B20_MQTT/src",
+                "c:/Users/alanr/Desktop/Codes/getstartedvscodeplatformio/SensorDS18B20/DS18B20_MQTT/.pio/libdeps/esp32dev/DallasTemperature",
+                "c:/Users/alanr/Desktop/Codes/getstartedvscodeplatformio/SensorDS18B20/DS18B20_MQTT/.pio/libdeps/esp32dev/OneWire",
                 "C:/Users/alanr/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/config",
                 "C:/Users/alanr/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/app_trace",
                 "C:/Users/alanr/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/app_update",
@@ -98,8 +100,10 @@
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
                 "path": [
-                    "c:/Users/alanr/Documents/PlatformIO/Projects/DS18B20_MQTT/include",
-                    "c:/Users/alanr/Documents/PlatformIO/Projects/DS18B20_MQTT/src",
+                    "c:/Users/alanr/Desktop/Codes/getstartedvscodeplatformio/SensorDS18B20/DS18B20_MQTT/include",
+                    "c:/Users/alanr/Desktop/Codes/getstartedvscodeplatformio/SensorDS18B20/DS18B20_MQTT/src",
+                    "c:/Users/alanr/Desktop/Codes/getstartedvscodeplatformio/SensorDS18B20/DS18B20_MQTT/.pio/libdeps/esp32dev/DallasTemperature",
+                    "c:/Users/alanr/Desktop/Codes/getstartedvscodeplatformio/SensorDS18B20/DS18B20_MQTT/.pio/libdeps/esp32dev/OneWire",
                     "C:/Users/alanr/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/config",
                     "C:/Users/alanr/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/app_trace",
                     "C:/Users/alanr/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/app_update",
