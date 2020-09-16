@@ -1,9 +1,26 @@
 #include <Arduino.h>
+#include <OneWire.h>
+#include <DallasTemperature.h>
+
+OneWire DXensor_Temperature(22);
+
+DallasTemperature temp(&DXensor_Temperature);
+
 
 void setup() {
-  // put your setup code here, to run once:
+  Serial.begin(9600);
+  temp.begin();
+
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+
+  temp.requestTemperatures();
+  float temperatura = temp.getTempCByIndex(0);
+
+  Serial.print("Temperatura: ");
+  Serial.print(temperatura);
+  Serial.println(" °C");
+  delay(100);
+
 }
