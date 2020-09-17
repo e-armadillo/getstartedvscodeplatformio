@@ -10,6 +10,7 @@
                 "c:/Users/alanr/Desktop/Codes/getstartedvscodeplatformio/SensorDS18B20/DS18B20_MQTT/src",
                 "c:/Users/alanr/Desktop/Codes/getstartedvscodeplatformio/SensorDS18B20/DS18B20_MQTT/.pio/libdeps/esp32dev/DallasTemperature",
                 "c:/Users/alanr/Desktop/Codes/getstartedvscodeplatformio/SensorDS18B20/DS18B20_MQTT/.pio/libdeps/esp32dev/OneWire",
+                "c:/Users/alanr/Desktop/Codes/getstartedvscodeplatformio/SensorDS18B20/DS18B20_MQTT/.pio/libdeps/esp32dev/PubSubClient/src",
                 "C:/Users/alanr/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/config",
                 "C:/Users/alanr/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/app_trace",
                 "C:/Users/alanr/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/app_update",
@@ -104,6 +105,7 @@
                     "c:/Users/alanr/Desktop/Codes/getstartedvscodeplatformio/SensorDS18B20/DS18B20_MQTT/src",
                     "c:/Users/alanr/Desktop/Codes/getstartedvscodeplatformio/SensorDS18B20/DS18B20_MQTT/.pio/libdeps/esp32dev/DallasTemperature",
                     "c:/Users/alanr/Desktop/Codes/getstartedvscodeplatformio/SensorDS18B20/DS18B20_MQTT/.pio/libdeps/esp32dev/OneWire",
+                    "c:/Users/alanr/Desktop/Codes/getstartedvscodeplatformio/SensorDS18B20/DS18B20_MQTT/.pio/libdeps/esp32dev/PubSubClient/src",
                     "C:/Users/alanr/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/config",
                     "C:/Users/alanr/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/app_trace",
                     "C:/Users/alanr/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/app_update",
@@ -195,6 +197,7 @@
             "defines": [
                 "PLATFORMIO=50001",
                 "ARDUINO_ESP32_DEV",
+                "VERSION=\"1.2.0\"",
                 "ESP32",
                 "ESP_PLATFORM",
                 "F_CPU=240000000L",

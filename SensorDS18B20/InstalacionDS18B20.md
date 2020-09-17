@@ -41,7 +41,7 @@ Dentro de la carpeta **src** encontramos el archivo **main.cpp** en el cual util
 #include <OneWire.h>
 #include <DallasTemperature.h>
 
-#define DS18B20_pin 22
+#define DS18B20_pin 2 //Pin 4 en el esp8266
 
 OneWire DXensor_Temperature(DS18B20_pin);
 
@@ -93,16 +93,13 @@ Para poder enviar nuestros datos al MQTT Broker utilizaremos el siguiente codigo
 #endif
 
 /*****************************************
- * Include Sensor Humedity
+ * Include Senspr Humedity
  ****************************************/
 
-#include <OneWire.h>
 #include <DallasTemperature.h>
+#include <OneWire.h>
 
-#define DS18B20_pin 22
-
-OneWire DXensor_Temperature(DS18B20_pin);
-
+OneWire DXensor_Temperature(2); //Pin 4 del esp8266
 DallasTemperature temp(&DXensor_Temperature);
 
 
@@ -114,12 +111,12 @@ const char *mqtt_user = "";
 const char *mqtt_pass = "";
 
 //To choose topic
-const char *subscribe = "";
+const char *subscribe = "/home"; //El topico al cual publicar
 const char *publish = "";
 
 //To connect to wifi
-const char* wifi_ssid = "";
-const char* password = "";
+const char* wifi_ssid = "VTR-4751327";
+const char* password = "Cb8mffrcmQzq";
 
 
 char topic[150];
@@ -175,8 +172,6 @@ void callback(char* topic, byte* payload, unsigned int  long length){
       Serial.println("Message:" + msg_in);
 }
 
-
-
 void setup() {
   //Setup of Wifi
   Serial.begin(9600);
@@ -185,7 +180,8 @@ void setup() {
   //Configuration for Client
   client.setServer(mqtt_address,mqtt_port);
   client.setCallback(callback);
-  dht.begin();
+
+  temp.begin();
 }
 //Reconnect function
 void reconnect(){
@@ -218,7 +214,11 @@ void loop() {
   if (client.connected()){
     //What we want to send
     //Example
-    String str = "Temperature: "+String(temperature())+" C";
+
+    temp.requestTemperatures();
+    float temperature = temp.getTempCByIndex(0);
+
+    String str = String(temperature);
     str.toCharArray(msg_c,25);
     client.publish(subscribe,msg_c);
     delay(1000);
@@ -229,12 +229,5 @@ void loop() {
     reconnect();
 
   }
-}
-
-int temperature(){
-    temp.requestTemperatures();
-    float t = temp.getTempCByIndex(0);
-    delay(100);
-    return t;
 }
 ```
