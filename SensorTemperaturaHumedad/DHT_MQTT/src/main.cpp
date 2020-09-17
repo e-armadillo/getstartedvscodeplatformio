@@ -4,7 +4,7 @@
 
 #include <Arduino.h>
 #include <PubSubClient.h>
-
+#include <HardwareSerial.h>
 #include <DNSServer.h>
 
 #ifdef ESP32
@@ -18,25 +18,25 @@
  ****************************************/
 
 #include <DHT.h>
-#define DHTPIN 22       // Here change to the correct pin in your setup
+#define DHTPIN 4       // Here change to the correct pin in your setup
 #define DHTTYPE DHT11   // there is 2 option here. DHT11 or DHT22
 DHT dht(DHTPIN, DHTTYPE);
 
 
 //Constant to connect to the MQTT broker
-const char *mqtt_address = "";
+const char *mqtt_address = "192.168.0.16";
 int mqtt_port = 1883;
 //Constant to login
-const char *mqtt_user = "";
-const char *mqtt_pass = "";
+const char *mqtt_user = "esp32";
+const char *mqtt_pass = "esp32";
 
 //To choose topic
-const char *subscribe = "";
+const char *subscribe = "/home";
 const char *publish = "";
 
 //To connect to wifi
-const char* wifi_ssid = "";
-const char* password = "";
+const char* wifi_ssid = "VTR-4751327";
+const char* password = "Cb8mffrcmQzq";
 
 
 char topic[150];
@@ -92,12 +92,7 @@ void callback(char* topic, byte* payload, unsigned int  long length){
       Serial.println("Message:" + msg_in);
 }
 
-int temperature(){
 
-  float t = dht.readTemperature();
-  delay(2000);
-  return t;
-}
 
 void setup() {
   //Setup of Wifi
@@ -140,7 +135,7 @@ void loop() {
   if (client.connected()){
     //What we want to send
     //Example
-    String str = "Temperature: "+String(temperature())+" C";
+    String str = String(dht.readTemperature());
     str.toCharArray(msg_c,25);
     client.publish(subscribe,msg_c);
     delay(1000);
