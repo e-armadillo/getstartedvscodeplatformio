@@ -14,29 +14,29 @@
 #endif
 
 /*****************************************
- * Include Senspr Humedity
+ * Include Sensor Humedity
  ****************************************/
 
 #include <DHT.h>
-#define DHTPIN 4       // Here change to the correct pin in your setup
+#define DHTPIN 2       // Here change to the correct pin in your setup
 #define DHTTYPE DHT11   // there is 2 option here. DHT11 or DHT22
 DHT dht(DHTPIN, DHTTYPE);
 
 
 //Constant to connect to the MQTT broker
-const char *mqtt_address = "192.168.0.16";
+const char *mqtt_address = "192.168.0.11";
 int mqtt_port = 1883;
 //Constant to login
 const char *mqtt_user = "esp32";
 const char *mqtt_pass = "esp32";
 
 //To choose topic
-const char *subscribe = "/home";
+const char *subscribe = "/invernadero/temperatura_amb";
 const char *publish = "";
 
 //To connect to wifi
-const char* wifi_ssid = "VTR-4751327";
-const char* password = "Cb8mffrcmQzq";
+const char* wifi_ssid = "VTR-5912856";
+const char* password = "Hb5ggxknpnqh";
 
 
 char topic[150];
