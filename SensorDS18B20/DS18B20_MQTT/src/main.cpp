@@ -4,7 +4,6 @@
 
 #include <Arduino.h>
 #include <PubSubClient.h>
-
 #include <DNSServer.h>
 
 #ifdef ESP32
@@ -18,6 +17,7 @@
  ****************************************/
 
 #include <DallasTemperature.h>
+// comunicacion i2c 
 #include <OneWire.h>
 
 OneWire DXensor_Temperature(2); //Pin 4 del esp8266
