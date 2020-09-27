@@ -122,7 +122,7 @@ Procedemos a utilizar cualquiera de los dos, en este caso utilizaremos **print()
 
 void setup(){
     Serial.begin(9600);
-    Serila.print("Hola mundo");
+    Serial.print("Hola mundo");
 }
 
 ```
