@@ -14,7 +14,7 @@
 #endif
 
 /*****************************************
- * Include Sensor Humedity
+ * Include Sensor Humidity
  ****************************************/
 
 #include <DHT.h>
@@ -24,19 +24,19 @@ DHT dht(DHTPIN, DHTTYPE);
 
 
 //Constant to connect to the MQTT broker
-const char *mqtt_address = "192.168.0.11";
+const char *mqtt_address = "192.168.178.20"; // direccion de host dnde corre MQTT. ( en mi caso IPV4 porque lo puse en el pc)
 int mqtt_port = 1883;
 //Constant to login
-const char *mqtt_user = "esp32";
-const char *mqtt_pass = "esp32";
+const char *mqtt_user = "user";
+const char *mqtt_pass = "password";
 
 //To choose topic
 const char *subscribe = "/invernadero/temperatura_amb";
 const char *publish = "";
 
 //To connect to wifi
-const char* wifi_ssid = "VTR-5912856";
-const char* password = "Hb5ggxknpnqh";
+const char* wifi_ssid = "FRITZ!Box\ 7490";
+const char* password = "Bievenido";
 
 
 char topic[150];
@@ -135,7 +135,8 @@ void loop() {
   if (client.connected()){
     //What we want to send
     //Example
-    String str = String(dht.readTemperature());
+    //String str = String(dht.readTemperature());
+    String str = "hola";
     str.toCharArray(msg_c,25);
     client.publish(subscribe,msg_c);
     delay(1000);
