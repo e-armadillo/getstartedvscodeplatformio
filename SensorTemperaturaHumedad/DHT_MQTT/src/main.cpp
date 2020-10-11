@@ -35,8 +35,8 @@ const char *subscribe = "/invernadero/temperatura_amb";
 const char *publish = "";
 
 //To connect to wifi
-const char* wifi_ssid = "FRITZ!Box\ 7490";
-const char* password = "Bievenido";
+const char* wifi_ssid = "FRITZ!Box 7490";
+const char* password = "Bienvenido";
 
 
 char topic[150];
@@ -96,7 +96,7 @@ void callback(char* topic, byte* payload, unsigned int  long length){
 
 void setup() {
   //Setup of Wifi
-  Serial.begin(9600);
+  Serial.begin(115200);
   W_setup();
 
   //Configuration for Client
@@ -139,6 +139,7 @@ void loop() {
     String str = "hola";
     str.toCharArray(msg_c,25);
     client.publish(subscribe,msg_c);
+    Serial.println(msg_c);
     delay(1000);
   }
 
