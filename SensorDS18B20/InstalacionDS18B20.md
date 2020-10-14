@@ -41,7 +41,11 @@ Dentro de la carpeta **src** encontramos el archivo **main.cpp** en el cual util
 #include <OneWire.h>
 #include <DallasTemperature.h>
 
+<<<<<<< HEAD
 #define DS18B20_pin 22
+=======
+#define DS18B20_pin 2 //Pin 4 en el esp8266
+>>>>>>> 1c21aa533cbbde761eecee11972dc5b5d28ebc92
 
 OneWire DXensor_Temperature(DS18B20_pin);
 
@@ -93,6 +97,7 @@ Para poder enviar nuestros datos al MQTT Broker utilizaremos el siguiente codigo
 #endif
 
 /*****************************************
+<<<<<<< HEAD
  * Include Sensor Humedity
  ****************************************/
 
@@ -103,6 +108,15 @@ Para poder enviar nuestros datos al MQTT Broker utilizaremos el siguiente codigo
 
 OneWire DXensor_Temperature(DS18B20_pin);
 
+=======
+ * Include Senspr Humedity
+ ****************************************/
+
+#include <DallasTemperature.h>
+#include <OneWire.h>
+
+OneWire DXensor_Temperature(2); //Pin 4 del esp8266
+>>>>>>> 1c21aa533cbbde761eecee11972dc5b5d28ebc92
 DallasTemperature temp(&DXensor_Temperature);
 
 
@@ -114,12 +128,21 @@ const char *mqtt_user = "";
 const char *mqtt_pass = "";
 
 //To choose topic
+<<<<<<< HEAD
 const char *subscribe = "";
 const char *publish = "";
 
 //To connect to wifi
 const char* wifi_ssid = "";
 const char* password = "";
+=======
+const char *subscribe = "/home"; //El topico al cual publicar
+const char *publish = "";
+
+//To connect to wifi
+const char* wifi_ssid = "VTR-4751327";
+const char* password = "Cb8mffrcmQzq";
+>>>>>>> 1c21aa533cbbde761eecee11972dc5b5d28ebc92
 
 
 char topic[150];
@@ -175,8 +198,11 @@ void callback(char* topic, byte* payload, unsigned int  long length){
       Serial.println("Message:" + msg_in);
 }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 1c21aa533cbbde761eecee11972dc5b5d28ebc92
 void setup() {
   //Setup of Wifi
   Serial.begin(9600);
@@ -185,7 +211,12 @@ void setup() {
   //Configuration for Client
   client.setServer(mqtt_address,mqtt_port);
   client.setCallback(callback);
+<<<<<<< HEAD
   dht.begin();
+=======
+
+  temp.begin();
+>>>>>>> 1c21aa533cbbde761eecee11972dc5b5d28ebc92
 }
 //Reconnect function
 void reconnect(){
@@ -218,7 +249,15 @@ void loop() {
   if (client.connected()){
     //What we want to send
     //Example
+<<<<<<< HEAD
     String str = "Temperature: "+String(temperature())+" C";
+=======
+
+    temp.requestTemperatures();
+    float temperature = temp.getTempCByIndex(0);
+
+    String str = String(temperature);
+>>>>>>> 1c21aa533cbbde761eecee11972dc5b5d28ebc92
     str.toCharArray(msg_c,25);
     client.publish(subscribe,msg_c);
     delay(1000);
@@ -230,6 +269,7 @@ void loop() {
 
   }
 }
+<<<<<<< HEAD
 
 int temperature(){
     temp.requestTemperatures();
@@ -237,4 +277,6 @@ int temperature(){
     delay(100);
     return t;
 }
+=======
+>>>>>>> 1c21aa533cbbde761eecee11972dc5b5d28ebc92
 ```
