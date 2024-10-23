@@ -12,6 +12,7 @@
             "type": "platformio-debug",
             "request": "launch",
             "name": "PIO Debug",
+
             "executable": "c:/Users/alanr/Desktop/Codes/getstartedvscodeplatformio/SensorDS18B20/DS18B20_MQTT/.pio/build/esp32dev/firmware.elf",
             "toolchainBinDir": "C:/Users/alanr/.platformio/packages/toolchain-xtensa32/bin",
             "preLaunchTask": {
