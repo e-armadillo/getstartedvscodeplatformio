@@ -1,3 +1,71 @@
+# Instalacion sensor de temperatura/humedad HDC1080
+
+Es un sensor de temperatura y humedad de mayor precision que puede ser usada mediante un conector **grove** o poder soldarle pines para utilizarlo en protoboard.
+
+![](Sensorhdc1080.png)
+<center>
+*Entrada blanca para conector Grove y orificios a los costados para soldar pines para protoboard*
+</center>
+
+***
+
+## Conexion del sensor
+
+Este sensor consta de los siguientes puertos:
+- VCC
+- GND
+- SDA
+- SCL
+
+Donde VCC se conecta a 5V (en el caso del esp8266 se sugiere conectar al pin 3V3). El puerto GND al GND del microcontrolador.
+
+Los puertos SDA y SCL (comunicacion I2C) son respectivamente la linea de datos y la linea de reloj(No profundizare en esto) y van conectados a los pines correspondientes del esp8266.
+
+![](Esp8266.png)
+
+- SCL corresponde al pin D1 (GPIO5)
+- SDA corresponde al pin D2 (GPIO4)
+
+***
+
+## Programacion del Sensor
+
+Utilizando PlatformIO en Visual Studio, creamos nuestro proyecto y le añadimos la libreria **ClosedCubeHDC1080** la cual nos permitira usar los comandos del sensor.
+
+```cpp
+#include <Arduino.h>
+#include <ClosedCube_HDC1080.h>
+
+ClosedCube_HDC1080 hdc1080;
+
+void setup()
+{
+	Serial.begin(9600);
+	Serial.println("ClosedCube HDC1080 Arduino Test");
+	hdc1080.begin(0x40);
+}
+
+void loop()
+{
+	Serial.print("T=");
+	Serial.print(hdc1080.readTemperature());
+	Serial.print("C, RH=");
+	Serial.print(hdc1080.readHumidity());
+	Serial.println("%");
+	delay(3000);
+}
+```
+
+El sensor si o si debe ir conectado a los pines SDA y SCL del microcontrolador por lo que en la programacion no es necesario definir un puerto de salida o entrada, estos ya estan establecidos.
+Podemos observar los resultados en el Monitor Serie.
+
+***
+
+## Sensor HDC1080 y MQTT
+
+El codigo para poder comunicar el sensor mediante MQTT a un Broker es el siguiente:
+
+```cpp
 /*****************************************
  * Include Libraries
  ****************************************/
@@ -16,29 +84,24 @@
 /*****************************************
  * Include Senspr Humedity
  ****************************************/
+#include <ClosedCube_HDC1080.h>
 
-#include <DallasTemperature.h>
-#include <OneWire.h>
-
-OneWire DXensor_Temperature(2); //Pin 4 del esp8266
-DallasTemperature temp(&DXensor_Temperature);
-
+ClosedCube_HDC1080 hdc1080;
 
 //Constant to connect to the MQTT broker
-
-const char *mqtt_address = "192.168.0.10"
+const char *mqtt_address = "192.168.0.10";
 int mqtt_port = 1883;
 //Constant to login
 const char *mqtt_user = "esp32";
 const char *mqtt_pass = "esp32";
 
 //To choose topic
-const char *subscribe = "/invernadero/temperatura";
+const char *subscribe = "/home";
 const char *publish = "";
 
 //To connect to wifi
-const char* wifi_ssid = "VTR-5912856";
-const char* password = "";
+const char* wifi_ssid = "VTR-4751327";
+const char* password = "Cb8mffrcmQzq";
 
 
 char topic[150];
@@ -103,7 +166,7 @@ void setup() {
   client.setServer(mqtt_address,mqtt_port);
   client.setCallback(callback);
 
-  temp.begin();
+  hdc1080.begin(0x40);
 }
 //Reconnect function
 void reconnect(){
@@ -137,8 +200,7 @@ void loop() {
     //What we want to send
     //Example
 
-    temp.requestTemperatures();
-    float temperature = temp.getTempCByIndex(0);
+    float temperature = hdc1080.readTemperature();
 
     String str = String(temperature);
     str.toCharArray(msg_c,25);
@@ -152,3 +214,4 @@ void loop() {
 
   }
 }
+```

@@ -6,7 +6,6 @@ OneWire DXensor_Temperature(2); //Pin 4
 
 DallasTemperature temp(&DXensor_Temperature);
 
-
 void setup() {
   Serial.begin(9600);
   temp.begin();

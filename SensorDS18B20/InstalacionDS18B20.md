@@ -41,6 +41,7 @@ Dentro de la carpeta **src** encontramos el archivo **main.cpp** en el cual util
 #include <OneWire.h>
 #include <DallasTemperature.h>
 
+
 #define DS18B20_pin 2 //Pin 4 en el esp8266
 
 OneWire DXensor_Temperature(DS18B20_pin);
@@ -93,6 +94,16 @@ Para poder enviar nuestros datos al MQTT Broker utilizaremos el siguiente codigo
 #endif
 
 /*****************************************
+ * Include Sensor Humedity
+ ****************************************/
+
+#include <OneWire.h>
+#include <DallasTemperature.h>
+
+#define DS18B20_pin 22
+
+OneWire DXensor_Temperature(DS18B20_pin);
+
  * Include Senspr Humedity
  ****************************************/
 
@@ -111,13 +122,14 @@ const char *mqtt_user = "";
 const char *mqtt_pass = "";
 
 //To choose topic
+
+//To connect to wifi
 const char *subscribe = "/home"; //El topico al cual publicar
 const char *publish = "";
 
 //To connect to wifi
 const char* wifi_ssid = "VTR-4751327";
 const char* password = "Cb8mffrcmQzq";
-
 
 char topic[150];
 char payload[50];
@@ -180,7 +192,7 @@ void setup() {
   //Configuration for Client
   client.setServer(mqtt_address,mqtt_port);
   client.setCallback(callback);
-
+  dht.begin();
   temp.begin();
 }
 //Reconnect function
@@ -230,4 +242,10 @@ void loop() {
 
   }
 }
-```
+
+int temperature(){
+    temp.requestTemperatures();
+    float t = temp.getTempCByIndex(0);
+    delay(100);
+    return t;
+}
